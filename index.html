@@ -144,16 +144,20 @@ section{max-width:1100px;margin:0 auto;padding:56px 16px 8px}
 .pack .foot a:hover{background:var(--green-dark)}
 
 /* menu */
+.menu-widget > input{position:absolute;opacity:0;pointer-events:none}
 .menu-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
-.menu-tabs button{
+.menu-tabs label{
   border:1.5px solid var(--wine);background:transparent;color:var(--wine);
   font-weight:700;font-size:.88rem;padding:9px 16px;border-radius:999px;cursor:pointer;
-  transition:all .12s ease;font-family:inherit;
+  transition:all .12s ease;
 }
-.menu-tabs button:hover{background:rgba(110,27,33,.08)}
-.menu-tabs button.active{background:var(--wine);color:#fff}
-.menu-group{display:none}
-.menu-group.active{display:block;animation:fadeIn .25s ease}
+.menu-tabs label:hover{background:rgba(110,27,33,.08)}
+.menu-group{display:none;animation:fadeIn .25s ease}
+#mt0:checked ~ #mg-0,#mt1:checked ~ #mg-1,#mt2:checked ~ #mg-2,
+#mt3:checked ~ #mg-3,#mt4:checked ~ #mg-4{display:block}
+#mt0:checked ~ .menu-tabs label[for="mt0"],#mt1:checked ~ .menu-tabs label[for="mt1"],
+#mt2:checked ~ .menu-tabs label[for="mt2"],#mt3:checked ~ .menu-tabs label[for="mt3"],
+#mt4:checked ~ .menu-tabs label[for="mt4"]{background:var(--wine);color:#fff}
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .menu-sub{font-size:1rem;font-weight:800;margin:20px 0 10px;color:var(--ink);
   display:flex;align-items:center;gap:10px}
@@ -166,6 +170,12 @@ section{max-width:1100px;margin:0 auto;padding:56px 16px 8px}
 .dish .d-info{flex:1;min-width:0}
 .dish .d-name{font-weight:700;font-size:.94rem}
 .dish .d-desc{font-size:.8rem;color:var(--ink-soft);margin-top:2px}
+.dish a.d-wa{
+  flex-shrink:0;text-decoration:none;background:#e9f7ee;color:var(--green-dark);
+  border:1px solid #bfe6cd;font-weight:700;font-size:.78rem;
+  padding:7px 12px;border-radius:999px;white-space:nowrap;
+}
+.dish a.d-wa:hover{background:var(--green);color:#fff;border-color:var(--green)}
 .menu-note{
   margin-top:18px;background:#f7ede0;border:1px solid #e3cdaf;border-radius:12px;
   padding:14px 16px;font-size:.9rem;color:var(--ink-soft);
@@ -216,7 +226,8 @@ footer{max-width:1100px;margin:0 auto;padding:28px 16px 90px;text-align:center;
 .wa-float svg{width:30px;height:30px;fill:#fff}
 
 @media (max-width:640px){
-  .nav-links{display:none}
+  .nav{padding:8px 12px;row-gap:2px}
+  .nav-links{order:3;width:100%;font-size:.8rem;margin:0 -6px}
   .hero{padding:52px 16px 60px}
   section{padding:44px 14px 6px}
 }
@@ -382,10 +393,120 @@ footer{max-width:1100px;margin:0 auto;padding:28px 16px 90px;text-align:center;
 <section id="menu">
   <div class="sec-head">
     <h2>Меню</h2>
-    <p>Каждое блюдо можно заказать отдельно — просто напишите нам в WhatsApp. Доставка за счёт покупателя либо самовывоз из заведения.</p>
+    <p>Каждое блюдо можно заказать отдельно — нажмите «Заказать», и в WhatsApp откроется чат с уже подставленным названием блюда. Доставка за счёт покупателя либо самовывоз из заведения.</p>
   </div>
-  <div class="menu-tabs" id="menuTabs"></div>
-  <div id="menuGroups"></div>
+  <div class="menu-widget">
+    <input type="radio" name="mtab" id="mt0" checked>
+    <input type="radio" name="mtab" id="mt1">
+    <input type="radio" name="mtab" id="mt2">
+    <input type="radio" name="mtab" id="mt3">
+    <input type="radio" name="mtab" id="mt4">
+    <div class="menu-tabs">
+      <label for="mt0">Закуски и салаты</label>
+      <label for="mt1">Корейские салаты</label>
+      <label for="mt2">Евро салаты</label>
+      <label for="mt3">Первые блюда</label>
+      <label for="mt4">Вторые блюда</label>
+    </div>
+    <div class="menu-group" id="mg-0">
+      <div class="dishes">
+        <div class="dish"><div class="d-info"><div class="d-name">Сотте из баклажан 🍆</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A1%D0%BE%D1%82%D1%82%D0%B5%20%D0%B8%D0%B7%20%D0%B1%D0%B0%D0%BA%D0%BB%D0%B0%D0%B6%D0%B0%D0%BD">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Тарталетки жульен</div><div class="d-desc">слоёное тесто, грибы, курица, сыр</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A2%D0%B0%D1%80%D1%82%D0%B0%D0%BB%D0%B5%D1%82%D0%BA%D0%B8%20%D0%B6%D1%83%D0%BB%D1%8C%D0%B5%D0%BD">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Тарталетки с лососью</div><div class="d-desc">лосось, крем-чиз, огурец, зелень</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A2%D0%B0%D1%80%D1%82%D0%B0%D0%BB%D0%B5%D1%82%D0%BA%D0%B8%20%D1%81%20%D0%BB%D0%BE%D1%81%D0%BE%D1%81%D1%8C%D1%8E">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Фирменная закуска из рисовой бумаги</div><div class="d-desc">креветки, огурцы, крабовые волокна, творожный сыр</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A4%D0%B8%D1%80%D0%BC%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%20%D0%B7%D0%B0%D0%BA%D1%83%D1%81%D0%BA%D0%B0%20%D0%B8%D0%B7%20%D1%80%D0%B8%D1%81%D0%BE%D0%B2%D0%BE%D0%B9%20%D0%B1%D1%83%D0%BC%D0%B0%D0%B3%D0%B8">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Тостерная закуска</div><div class="d-desc">крем-чиз, огурец, красная рыба, зелень</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A2%D0%BE%D1%81%D1%82%D0%B5%D1%80%D0%BD%D0%B0%D1%8F%20%D0%B7%D0%B0%D0%BA%D1%83%D1%81%D0%BA%D0%B0">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Грибничок</div><div class="d-desc">запечённые грибы, яйцо, тёртый сыр, майонез</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%93%D1%80%D0%B8%D0%B1%D0%BD%D0%B8%D1%87%D0%BE%D0%BA">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Рулеты из лаваша</div><div class="d-desc">лаваш, крабовые палочки, яйца, огурцы, майонез, чеснок, зелень</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A0%D1%83%D0%BB%D0%B5%D1%82%D1%8B%20%D0%B8%D0%B7%20%D0%BB%D0%B0%D0%B2%D0%B0%D1%88%D0%B0">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Брускетта</div><div class="d-desc">багет, помидоры, зелень, крем-чиз, шпроты или лосось</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%91%D1%80%D1%83%D1%81%D0%BA%D0%B5%D1%82%D1%82%D0%B0">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Яичные блины с крабовыми палочками</div><div class="d-desc">волокна крабовых палочек, сыр, майонез, зелень</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%AF%D0%B8%D1%87%D0%BD%D1%8B%D0%B5%20%D0%B1%D0%BB%D0%B8%D0%BD%D1%8B%20%D1%81%20%D0%BA%D1%80%D0%B0%D0%B1%D0%BE%D0%B2%D1%8B%D0%BC%D0%B8%20%D0%BF%D0%B0%D0%BB%D0%BE%D1%87%D0%BA%D0%B0%D0%BC%D0%B8">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Закусочные мини-бургеры</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%97%D0%B0%D0%BA%D1%83%D1%81%D0%BE%D1%87%D0%BD%D1%8B%D0%B5%20%D0%BC%D0%B8%D0%BD%D0%B8-%D0%B1%D1%83%D1%80%D0%B3%D0%B5%D1%80%D1%8B">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Фаршированные блины с курицей и грибами</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A4%D0%B0%D1%80%D1%88%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D1%8B%D0%B5%20%D0%B1%D0%BB%D0%B8%D0%BD%D1%8B%20%D1%81%20%D0%BA%D1%83%D1%80%D0%B8%D1%86%D0%B5%D0%B9%20%D0%B8%20%D0%B3%D1%80%D0%B8%D0%B1%D0%B0%D0%BC%D0%B8">Заказать</a></div>
+      </div>
+    </div>
+    <div class="menu-group" id="mg-1">
+      <div class="dishes">
+        <div class="dish"><div class="d-info"><div class="d-name">Папоротник</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9F%D0%B0%D0%BF%D0%BE%D1%80%D0%BE%D1%82%D0%BD%D0%B8%D0%BA">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Огурцы с мясом в пикантном соусе</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9E%D0%B3%D1%83%D1%80%D1%86%D1%8B%20%D1%81%20%D0%BC%D1%8F%D1%81%D0%BE%D0%BC%20%D0%B2%20%D0%BF%D0%B8%D0%BA%D0%B0%D0%BD%D1%82%D0%BD%D0%BE%D0%BC%20%D1%81%D0%BE%D1%83%D1%81%D0%B5">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Хе из требухи</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A5%D0%B5%20%D0%B8%D0%B7%20%D1%82%D1%80%D0%B5%D0%B1%D1%83%D1%85%D0%B8">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Хе из куриной грудки</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A5%D0%B5%20%D0%B8%D0%B7%20%D0%BA%D1%83%D1%80%D0%B8%D0%BD%D0%BE%D0%B9%20%D0%B3%D1%80%D1%83%D0%B4%D0%BA%D0%B8">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Хе из рыбы</div><div class="d-desc">по сезону</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A5%D0%B5%20%D0%B8%D0%B7%20%D1%80%D1%8B%D0%B1%D1%8B">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Жареные древесные грибы</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%96%D0%B0%D1%80%D0%B5%D0%BD%D1%8B%D0%B5%20%D0%B4%D1%80%D0%B5%D0%B2%D0%B5%D1%81%D0%BD%D1%8B%D0%B5%20%D0%B3%D1%80%D0%B8%D0%B1%D1%8B">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Фаршированный перец</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A4%D0%B0%D1%80%D1%88%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D1%8B%D0%B9%20%D0%BF%D0%B5%D1%80%D0%B5%D1%86">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Чапче</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A7%D0%B0%D0%BF%D1%87%D0%B5">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Жареная морская капуста</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%96%D0%B0%D1%80%D0%B5%D0%BD%D0%B0%D1%8F%20%D0%BC%D0%BE%D1%80%D1%81%D0%BA%D0%B0%D1%8F%20%D0%BA%D0%B0%D0%BF%D1%83%D1%81%D1%82%D0%B0">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Муги с овощами</div><div class="d-desc">крахмальный холодец</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9C%D1%83%D0%B3%D0%B8%20%D1%81%20%D0%BE%D0%B2%D0%BE%D1%89%D0%B0%D0%BC%D0%B8">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Перец жареный со свининой</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9F%D0%B5%D1%80%D0%B5%D1%86%20%D0%B6%D0%B0%D1%80%D0%B5%D0%BD%D1%8B%D0%B9%20%D1%81%D0%BE%20%D1%81%D0%B2%D0%B8%D0%BD%D0%B8%D0%BD%D0%BE%D0%B9">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Салат витаминный в корейском стиле</div><div class="d-desc">капуста, морковь, свёкла, зелёный лук, кунжутное масло, уксус, сахар, устричный соус, корень имбиря, кунжут</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A1%D0%B0%D0%BB%D0%B0%D1%82%20%D0%B2%D0%B8%D1%82%D0%B0%D0%BC%D0%B8%D0%BD%D0%BD%D1%8B%D0%B9%20%D0%B2%20%D0%BA%D0%BE%D1%80%D0%B5%D0%B9%D1%81%D0%BA%D0%BE%D0%BC%20%D1%81%D1%82%D0%B8%D0%BB%D0%B5">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Салат из шпината</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A1%D0%B0%D0%BB%D0%B0%D1%82%20%D0%B8%D0%B7%20%D1%88%D0%BF%D0%B8%D0%BD%D0%B0%D1%82%D0%B0">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Салат из баклажанов по-корейски</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A1%D0%B0%D0%BB%D0%B0%D1%82%20%D0%B8%D0%B7%20%D0%B1%D0%B0%D0%BA%D0%BB%D0%B0%D0%B6%D0%B0%D0%BD%D0%BE%D0%B2%20%D0%BF%D0%BE-%D0%BA%D0%BE%D1%80%D0%B5%D0%B9%D1%81%D0%BA%D0%B8">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Коралловые гребешки</div><div class="d-desc">гребешки, репчатый лук, морковь, болгарский перец, огурец, уксус, кунжутное масло, чеснок, специи</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9A%D0%BE%D1%80%D0%B0%D0%BB%D0%BB%D0%BE%D0%B2%D1%8B%D0%B5%20%D0%B3%D1%80%D0%B5%D0%B1%D0%B5%D1%88%D0%BA%D0%B8">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Заправленные осьминожки с овощами</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%97%D0%B0%D0%BF%D1%80%D0%B0%D0%B2%D0%BB%D0%B5%D0%BD%D0%BD%D1%8B%D0%B5%20%D0%BE%D1%81%D1%8C%D0%BC%D0%B8%D0%BD%D0%BE%D0%B6%D0%BA%D0%B8%20%D1%81%20%D0%BE%D0%B2%D0%BE%D1%89%D0%B0%D0%BC%D0%B8">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Тыбы по-китайски с овощами</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A2%D1%8B%D0%B1%D1%8B%20%D0%BF%D0%BE-%D0%BA%D0%B8%D1%82%D0%B0%D0%B9%D1%81%D0%BA%D0%B8%20%D1%81%20%D0%BE%D0%B2%D0%BE%D1%89%D0%B0%D0%BC%D0%B8">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Фаршированное тофу с мясом</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A4%D0%B0%D1%80%D1%88%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D0%BE%D0%B5%20%D1%82%D0%BE%D1%84%D1%83%20%D1%81%20%D0%BC%D1%8F%D1%81%D0%BE%D0%BC">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Жареная острая куриная голень с ток</div><div class="d-desc">корейские клёцки</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%96%D0%B0%D1%80%D0%B5%D0%BD%D0%B0%D1%8F%20%D0%BE%D1%81%D1%82%D1%80%D0%B0%D1%8F%20%D0%BA%D1%83%D1%80%D0%B8%D0%BD%D0%B0%D1%8F%20%D0%B3%D0%BE%D0%BB%D0%B5%D0%BD%D1%8C%20%D1%81%20%D1%82%D0%BE%D0%BA">Заказать</a></div>
+      </div>
+    </div>
+    <div class="menu-group" id="mg-2">
+      <div class="dishes">
+        <div class="dish"><div class="d-info"><div class="d-name">Оливье</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9E%D0%BB%D0%B8%D0%B2%D1%8C%D0%B5">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Нежность</div><div class="d-desc">ананасы, кукуруза, куриная грудка, тёртый сыр, майонез</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9D%D0%B5%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%8C">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Французский салат</div><div class="d-desc">капуста, морковь, свёкла, яйцо, мясо, пай, майонез</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A4%D1%80%D0%B0%D0%BD%D1%86%D1%83%D0%B7%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%D0%B0%D0%BB%D0%B0%D1%82">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Подсолнух</div><div class="d-desc">курица, грибы, яйцо, маслины, чипсы, майонез</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9F%D0%BE%D0%B4%D1%81%D0%BE%D0%BB%D0%BD%D1%83%D1%85">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Гнездо глухаря</div><div class="d-desc">огурец, пай, кукуруза, перепелиные яйца, майонез</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%93%D0%BD%D0%B5%D0%B7%D0%B4%D0%BE%20%D0%B3%D0%BB%D1%83%D1%85%D0%B0%D1%80%D1%8F">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Особый</div><div class="d-desc">помидоры, чеснок, сухарики, сыр, кукуруза, копчёный карбонат</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9E%D1%81%D0%BE%D0%B1%D1%8B%D0%B9">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Цезарь</div><div class="d-desc">с курицей или креветками</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A6%D0%B5%D0%B7%D0%B0%D1%80%D1%8C">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Салат с хрустящими баклажанами</div><div class="d-desc">баклажаны, руккола, помидоры, крем-чиз, чили-соус</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A1%D0%B0%D0%BB%D0%B0%D1%82%20%D1%81%20%D1%85%D1%80%D1%83%D1%81%D1%82%D1%8F%D1%89%D0%B8%D0%BC%D0%B8%20%D0%B1%D0%B0%D0%BA%D0%BB%D0%B0%D0%B6%D0%B0%D0%BD%D0%B0%D0%BC%D0%B8">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Греческий салат</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%93%D1%80%D0%B5%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B9%20%D1%81%D0%B0%D0%BB%D0%B0%D1%82">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Жозефина</div><div class="d-desc">курица, шампиньоны, яйца, помидор, сыр, зелёный лук, майонез</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%96%D0%BE%D0%B7%D0%B5%D1%84%D0%B8%D0%BD%D0%B0">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Микс салатов</div><div class="d-desc">сладкий перец, огурцы, помидоры, колбаса, маслины, заправка на оливковом масле</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9C%D0%B8%D0%BA%D1%81%20%D1%81%D0%B0%D0%BB%D0%B0%D1%82%D0%BE%D0%B2">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Охотник</div><div class="d-desc">варёная говядина, помидоры, огурцы, паприка, зелёный горошек, заправка: соль, чеснок, масло, соевый соус</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9E%D1%85%D0%BE%D1%82%D0%BD%D0%B8%D0%BA">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Креветки на пляже</div><div class="d-desc">руккола, жареные креветки, авокадо, черри, оливковое масло, бальзамик, кедровые орехи</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9A%D1%80%D0%B5%D0%B2%D0%B5%D1%82%D0%BA%D0%B8%20%D0%BD%D0%B0%20%D0%BF%D0%BB%D1%8F%D0%B6%D0%B5">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Русская закуска</div><div class="d-desc">селёдка, разносол, картофель</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A0%D1%83%D1%81%D1%81%D0%BA%D0%B0%D1%8F%20%D0%B7%D0%B0%D0%BA%D1%83%D1%81%D0%BA%D0%B0">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Холодец</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A5%D0%BE%D0%BB%D0%BE%D0%B4%D0%B5%D1%86">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Микс-салат с копчёной уткой</div><div class="d-desc">копчёная утка, микс салата, черри, перепелиные яйца, бальзамик</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9C%D0%B8%D0%BA%D1%81-%D1%81%D0%B0%D0%BB%D0%B0%D1%82%20%D1%81%20%D0%BA%D0%BE%D0%BF%D1%87%D1%91%D0%BD%D0%BE%D0%B9%20%D1%83%D1%82%D0%BA%D0%BE%D0%B9">Заказать</a></div>
+      </div>
+    </div>
+    <div class="menu-group" id="mg-3">
+      <div class="menu-sub">Евро позиции</div>
+      <div class="dishes">
+        <div class="dish"><div class="d-info"><div class="d-name">Солянка сборная</div><div class="d-desc">с копчёностями</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A1%D0%BE%D0%BB%D1%8F%D0%BD%D0%BA%D0%B0%20%D1%81%D0%B1%D0%BE%D1%80%D0%BD%D0%B0%D1%8F">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Лапша куриная или лапша с фрикадельками</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9B%D0%B0%D0%BF%D1%88%D0%B0%20%D0%BA%D1%83%D1%80%D0%B8%D0%BD%D0%B0%D1%8F%20%D0%B8%D0%BB%D0%B8%20%D0%BB%D0%B0%D0%BF%D1%88%D0%B0%20%D1%81%20%D1%84%D1%80%D0%B8%D0%BA%D0%B0%D0%B4%D0%B5%D0%BB%D1%8C%D0%BA%D0%B0%D0%BC%D0%B8">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Окрошка</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9E%D0%BA%D1%80%D0%BE%D1%88%D0%BA%D0%B0">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Пельмени с бульоном</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9F%D0%B5%D0%BB%D1%8C%D0%BC%D0%B5%D0%BD%D0%B8%20%D1%81%20%D0%B1%D1%83%D0%BB%D1%8C%D0%BE%D0%BD%D0%BE%D0%BC">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Холодный борщ</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A5%D0%BE%D0%BB%D0%BE%D0%B4%D0%BD%D1%8B%D0%B9%20%D0%B1%D0%BE%D1%80%D1%89">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Том ям</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A2%D0%BE%D0%BC%20%D1%8F%D0%BC">Заказать</a></div>
+      </div>
+      <div class="menu-sub">Корейские позиции</div>
+      <div class="dishes">
+        <div class="dish"><div class="d-info"><div class="d-name">Сиряк тямури</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A1%D0%B8%D1%80%D1%8F%D0%BA%20%D1%82%D1%8F%D0%BC%D1%83%D1%80%D0%B8">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Юккедянг</div><div class="d-desc">острый суп</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%AE%D0%BA%D0%BA%D0%B5%D0%B4%D1%8F%D0%BD%D0%B3">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Кукси</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9A%D1%83%D0%BA%D1%81%D0%B8">Заказать</a></div>
+      </div>
+      <div class="menu-sub">Азиатские позиции</div>
+      <div class="dishes">
+        <div class="dish"><div class="d-info"><div class="d-name">Бешбармак</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%91%D0%B5%D1%88%D0%B1%D0%B0%D1%80%D0%BC%D0%B0%D0%BA">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Шурпа</div><div class="d-desc">говядина</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A8%D1%83%D1%80%D0%BF%D0%B0">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Лагман</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9B%D0%B0%D0%B3%D0%BC%D0%B0%D0%BD">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Суп с фрикадельками, нутом и лапшой</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A1%D1%83%D0%BF%20%D1%81%20%D1%84%D1%80%D0%B8%D0%BA%D0%B0%D0%B4%D0%B5%D0%BB%D1%8C%D0%BA%D0%B0%D0%BC%D0%B8%2C%20%D0%BD%D1%83%D1%82%D0%BE%D0%BC%20%D0%B8%20%D0%BB%D0%B0%D0%BF%D1%88%D0%BE%D0%B9">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Голубцы</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%93%D0%BE%D0%BB%D1%83%D0%B1%D1%86%D1%8B">Заказать</a></div>
+      </div>
+    </div>
+    <div class="menu-group" id="mg-4">
+      <div class="dishes">
+        <div class="dish"><div class="d-info"><div class="d-name">Свинина запечённая с овощами</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A1%D0%B2%D0%B8%D0%BD%D0%B8%D0%BD%D0%B0%20%D0%B7%D0%B0%D0%BF%D0%B5%D1%87%D1%91%D0%BD%D0%BD%D0%B0%D1%8F%20%D1%81%20%D0%BE%D0%B2%D0%BE%D1%89%D0%B0%D0%BC%D0%B8">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Мясной рулет с грибами</div><div class="d-desc">свинина</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9C%D1%8F%D1%81%D0%BD%D0%BE%D0%B9%20%D1%80%D1%83%D0%BB%D0%B5%D1%82%20%D1%81%20%D0%B3%D1%80%D0%B8%D0%B1%D0%B0%D0%BC%D0%B8">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Жареная свиная шейка с луком и грибами</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%96%D0%B0%D1%80%D0%B5%D0%BD%D0%B0%D1%8F%20%D1%81%D0%B2%D0%B8%D0%BD%D0%B0%D1%8F%20%D1%88%D0%B5%D0%B9%D0%BA%D0%B0%20%D1%81%20%D0%BB%D1%83%D0%BA%D0%BE%D0%BC%20%D0%B8%20%D0%B3%D1%80%D0%B8%D0%B1%D0%B0%D0%BC%D0%B8">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Мясо по-французски</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9C%D1%8F%D1%81%D0%BE%20%D0%BF%D0%BE-%D1%84%D1%80%D0%B0%D0%BD%D1%86%D1%83%D0%B7%D1%81%D0%BA%D0%B8">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Свиной окорок в красном вине</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A1%D0%B2%D0%B8%D0%BD%D0%BE%D0%B9%20%D0%BE%D0%BA%D0%BE%D1%80%D0%BE%D0%BA%20%D0%B2%20%D0%BA%D1%80%D0%B0%D1%81%D0%BD%D0%BE%D0%BC%20%D0%B2%D0%B8%D0%BD%D0%B5">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Мясо по-китайски</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9C%D1%8F%D1%81%D0%BE%20%D0%BF%D0%BE-%D0%BA%D0%B8%D1%82%D0%B0%D0%B9%D1%81%D0%BA%D0%B8">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Утка фаршированная с ананасами и яблоками</div><div class="d-desc">с мандариновым цитрусом</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A3%D1%82%D0%BA%D0%B0%20%D1%84%D0%B0%D1%80%D1%88%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D0%B0%D1%8F%20%D1%81%20%D0%B0%D0%BD%D0%B0%D0%BD%D0%B0%D1%81%D0%B0%D0%BC%D0%B8%20%D0%B8%20%D1%8F%D0%B1%D0%BB%D0%BE%D0%BA%D0%B0%D0%BC%D0%B8">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Утка тушёная с яблоками и черносливом</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%A3%D1%82%D0%BA%D0%B0%20%D1%82%D1%83%D1%88%D1%91%D0%BD%D0%B0%D1%8F%20%D1%81%20%D1%8F%D0%B1%D0%BB%D0%BE%D0%BA%D0%B0%D0%BC%D0%B8%20%D0%B8%20%D1%87%D0%B5%D1%80%D0%BD%D0%BE%D1%81%D0%BB%D0%B8%D0%B2%D0%BE%D0%BC">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Говядина с болгарским перцем и картофелем по-деревенски</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%93%D0%BE%D0%B2%D1%8F%D0%B4%D0%B8%D0%BD%D0%B0%20%D1%81%20%D0%B1%D0%BE%D0%BB%D0%B3%D0%B0%D1%80%D1%81%D0%BA%D0%B8%D0%BC%20%D0%BF%D0%B5%D1%80%D1%86%D0%B5%D0%BC%20%D0%B8%20%D0%BA%D0%B0%D1%80%D1%82%D0%BE%D1%84%D0%B5%D0%BB%D0%B5%D0%BC%20%D0%BF%D0%BE-%D0%B4%D0%B5%D1%80%D0%B5%D0%B2%D0%B5%D0%BD%D1%81%D0%BA%D0%B8">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Картофельный рулет с говяжьим фаршем</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9A%D0%B0%D1%80%D1%82%D0%BE%D1%84%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%B9%20%D1%80%D1%83%D0%BB%D0%B5%D1%82%20%D1%81%20%D0%B3%D0%BE%D0%B2%D1%8F%D0%B6%D1%8C%D0%B8%D0%BC%20%D1%84%D0%B0%D1%80%D1%88%D0%B5%D0%BC">Заказать</a></div>
+        <div class="dish"><div class="d-info"><div class="d-name">Маринованная свинина, куриный окорок</div><div class="d-desc">запечённый в конвектомате</div></div><a class="d-wa" target="_blank" rel="noopener" href="https://wa.me/821080247552?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%3A%20%D0%9C%D0%B0%D1%80%D0%B8%D0%BD%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D0%B0%D1%8F%20%D1%81%D0%B2%D0%B8%D0%BD%D0%B8%D0%BD%D0%B0%2C%20%D0%BA%D1%83%D1%80%D0%B8%D0%BD%D1%8B%D0%B9%20%D0%BE%D0%BA%D0%BE%D1%80%D0%BE%D0%BA">Заказать</a></div>
+      </div>
+    </div>
+  </div>
   <div class="menu-note">
     💡 При желании можно заказать любой салат <b>не по меню</b>. Хе из рыбы — по сезону.
     Примеры блюд и подачи — в <a href="https://www.instagram.com/asiam_kr" target="_blank" rel="noopener">Instagram</a>.
@@ -458,7 +579,7 @@ footer{max-width:1100px;margin:0 auto;padding:28px 16px 90px;text-align:center;
 </section>
 
 <footer>
-  © <span id="year"></span> АЗИЯ_М — выездные фуршеты и банкеты · Южная Корея<br>
+  © 2026 АЗИЯ_М — выездные фуршеты и банкеты · Южная Корея<br>
   WhatsApp: +82 10 8024 7552 · Instagram: <a href="https://www.instagram.com/asiam_kr" target="_blank" rel="noopener">asiam_kr</a> / <a href="https://www.instagram.com/Vladsim86" target="_blank" rel="noopener">Vladsim86</a>
 </footer>
 
@@ -466,166 +587,5 @@ footer{max-width:1100px;margin:0 auto;padding:28px 16px 90px;text-align:center;
   <svg viewBox="0 0 32 32"><path d="M16.04 3C9.06 3 3.4 8.66 3.4 15.64c0 2.23.58 4.4 1.69 6.31L3.3 28.7l6.93-1.75a12.6 12.6 0 0 0 5.8 1.42h.01c6.98 0 12.64-5.66 12.64-12.64C28.68 8.66 23.02 3 16.04 3zm0 22.96h-.01c-1.9 0-3.75-.51-5.36-1.47l-.38-.23-3.98 1 1.03-3.88-.25-.4a10.2 10.2 0 0 1-1.57-5.45c0-5.65 4.6-10.24 10.25-10.24 2.74 0 5.31 1.07 7.24 3a10.18 10.18 0 0 1 3 7.25c0 5.65-4.6 10.25-10.24 10.25zm5.62-7.67c-.31-.15-1.82-.9-2.1-1-.28-.1-.49-.15-.7.16-.2.3-.79.99-.97 1.2-.18.2-.36.23-.66.08-.31-.16-1.3-.48-2.48-1.53-.92-.82-1.53-1.83-1.71-2.13-.18-.31-.02-.48.13-.63.14-.14.31-.36.46-.54.16-.18.21-.31.31-.51.1-.21.05-.39-.02-.54-.08-.15-.7-1.68-.96-2.3-.25-.6-.5-.52-.7-.53h-.6c-.2 0-.53.07-.81.38-.28.3-1.06 1.03-1.06 2.52s1.08 2.93 1.24 3.13c.15.2 2.14 3.26 5.18 4.57.72.31 1.29.5 1.73.64.72.23 1.38.2 1.9.12.58-.09 1.82-.75 2.08-1.47.26-.72.26-1.33.18-1.46-.08-.13-.28-.2-.59-.36z"/></svg>
 </a>
 
-<script>
-const MENU = [
-  {
-    tab: "Закуски и салаты",
-    groups: [{
-      title: "Закуски и салаты",
-      items: [
-        ["Сотте из баклажан 🍆", ""],
-        ["Тарталетки жульен", "слоёное тесто, грибы, курица, сыр"],
-        ["Тарталетки с лососью", "лосось, крем-чиз, огурец, зелень"],
-        ["Фирменная закуска из рисовой бумаги", "креветки, огурцы, крабовые волокна, творожный сыр"],
-        ["Тостерная закуска", "крем-чиз, огурец, красная рыба, зелень"],
-        ["Грибничок", "запечённые грибы, яйцо, тёртый сыр, майонез"],
-        ["Рулеты из лаваша", "лаваш, крабовые палочки, яйца, огурцы, майонез, чеснок, зелень"],
-        ["Брускетта", "багет, помидоры, зелень, крем-чиз, шпроты или лосось"],
-        ["Яичные блины с крабовыми палочками", "волокна крабовых палочек, сыр, майонез, зелень"],
-        ["Закусочные мини-бургеры", ""],
-        ["Фаршированные блины с курицей и грибами", ""]
-      ]
-    }]
-  },
-  {
-    tab: "Корейские салаты",
-    groups: [{
-      title: "Корейские салаты",
-      items: [
-        ["Папоротник", ""],
-        ["Огурцы с мясом в пикантном соусе", ""],
-        ["Хе из требухи", ""],
-        ["Хе из куриной грудки", ""],
-        ["Хе из рыбы", "по сезону"],
-        ["Жареные древесные грибы", ""],
-        ["Фаршированный перец", ""],
-        ["Чапче", ""],
-        ["Жареная морская капуста", ""],
-        ["Муги с овощами", "крахмальный холодец"],
-        ["Перец жареный со свининой", ""],
-        ["Салат витаминный в корейском стиле", "капуста, морковь, свёкла, зелёный лук, кунжутное масло, уксус, сахар, устричный соус, корень имбиря, кунжут"],
-        ["Салат из шпината", ""],
-        ["Салат из баклажанов по-корейски", ""],
-        ["Коралловые гребешки", "гребешки, репчатый лук, морковь, болгарский перец, огурец, уксус, кунжутное масло, чеснок, специи"],
-        ["Заправленные осьминожки с овощами", ""],
-        ["Тыбы по-китайски с овощами", ""],
-        ["Фаршированное тофу с мясом", ""],
-        ["Жареная острая куриная голень с ток", "корейские клёцки"]
-      ]
-    }]
-  },
-  {
-    tab: "Евро салаты",
-    groups: [{
-      title: "Евро салаты",
-      items: [
-        ["Оливье", ""],
-        ["Нежность", "ананасы, кукуруза, куриная грудка, тёртый сыр, майонез"],
-        ["Французский салат", "капуста, морковь, свёкла, яйцо, мясо, пай, майонез"],
-        ["Подсолнух", "курица, грибы, яйцо, маслины, чипсы, майонез"],
-        ["Гнездо глухаря", "огурец, пай, кукуруза, перепелиные яйца, майонез"],
-        ["Особый", "помидоры, чеснок, сухарики, сыр, кукуруза, копчёный карбонат"],
-        ["Цезарь", "с курицей или креветками"],
-        ["Салат с хрустящими баклажанами", "баклажаны, руккола, помидоры, крем-чиз, чили-соус"],
-        ["Греческий салат", ""],
-        ["Жозефина", "курица, шампиньоны, яйца, помидор, сыр, зелёный лук, майонез"],
-        ["Микс салатов", "сладкий перец, огурцы, помидоры, колбаса, маслины, заправка на оливковом масле"],
-        ["Охотник", "варёная говядина, помидоры, огурцы, паприка, зелёный горошек, заправка: соль, чеснок, масло, соевый соус"],
-        ["Креветки на пляже", "руккола, жареные креветки, авокадо, черри, оливковое масло, бальзамик, кедровые орехи"],
-        ["Русская закуска", "селёдка, разносол, картофель"],
-        ["Холодец", ""],
-        ["Микс-салат с копчёной уткой", "копчёная утка, микс салата, черри, перепелиные яйца, бальзамик"]
-      ]
-    }]
-  },
-  {
-    tab: "Первые блюда",
-    groups: [
-      { title: "Евро позиции", items: [
-        ["Солянка сборная", "с копчёностями"],
-        ["Лапша куриная или лапша с фрикадельками", ""],
-        ["Окрошка", ""],
-        ["Пельмени с бульоном", ""],
-        ["Холодный борщ", ""],
-        ["Том ям", ""]
-      ]},
-      { title: "Корейские позиции", items: [
-        ["Сиряк тямури", ""],
-        ["Юккедянг", "острый суп"],
-        ["Кукси", ""]
-      ]},
-      { title: "Азиатские позиции", items: [
-        ["Бешбармак", ""],
-        ["Шурпа", "говядина"],
-        ["Лагман", ""],
-        ["Суп с фрикадельками, нутом и лапшой", ""],
-        ["Голубцы", ""]
-      ]}
-    ]
-  },
-  {
-    tab: "Вторые блюда",
-    groups: [{
-      title: "Вторые блюда",
-      items: [
-        ["Свинина запечённая с овощами", ""],
-        ["Мясной рулет с грибами", "свинина"],
-        ["Жареная свиная шейка с луком и грибами", ""],
-        ["Мясо по-французски", ""],
-        ["Свиной окорок в красном вине", ""],
-        ["Мясо по-китайски", ""],
-        ["Утка фаршированная с ананасами и яблоками", "с мандариновым цитрусом"],
-        ["Утка тушёная с яблоками и черносливом", ""],
-        ["Говядина с болгарским перцем и картофелем по-деревенски", ""],
-        ["Картофельный рулет с говяжьим фаршем", ""],
-        ["Маринованная свинина, куриный окорок", "запечённый в конвектомате"]
-      ]
-    }]
-  }
-];
-
-const tabsEl = document.getElementById("menuTabs");
-const groupsEl = document.getElementById("menuGroups");
-
-MENU.forEach((cat, i) => {
-  const btn = document.createElement("button");
-  btn.textContent = cat.tab;
-  btn.className = i === 0 ? "active" : "";
-  btn.onclick = () => {
-    tabsEl.querySelectorAll("button").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    groupsEl.querySelectorAll(".menu-group").forEach(g => g.classList.remove("active"));
-    document.getElementById("mg-" + i).classList.add("active");
-  };
-  tabsEl.appendChild(btn);
-
-  const wrap = document.createElement("div");
-  wrap.className = "menu-group" + (i === 0 ? " active" : "");
-  wrap.id = "mg-" + i;
-  cat.groups.forEach(g => {
-    if (cat.groups.length > 1) {
-      const h = document.createElement("div");
-      h.className = "menu-sub";
-      h.textContent = g.title;
-      wrap.appendChild(h);
-    }
-    const grid = document.createElement("div");
-    grid.className = "dishes";
-    g.items.forEach(([name, desc]) => {
-      const d = document.createElement("div");
-      d.className = "dish";
-      d.innerHTML =
-        `<div class="d-info"><div class="d-name"></div>${desc ? '<div class="d-desc"></div>' : ""}</div>`;
-      d.querySelector(".d-name").textContent = name;
-      if (desc) d.querySelector(".d-desc").textContent = desc;
-      grid.appendChild(d);
-    });
-    wrap.appendChild(grid);
-  });
-  groupsEl.appendChild(wrap);
-});
-
-document.getElementById("year").textContent = new Date().getFullYear();
-</script>
 </body>
 </html>
