@@ -166,12 +166,6 @@ section{max-width:1100px;margin:0 auto;padding:56px 16px 8px}
 .dish .d-info{flex:1;min-width:0}
 .dish .d-name{font-weight:700;font-size:.94rem}
 .dish .d-desc{font-size:.8rem;color:var(--ink-soft);margin-top:2px}
-.dish a.d-wa{
-  flex-shrink:0;text-decoration:none;background:#e9f7ee;color:var(--green-dark);
-  border:1px solid #bfe6cd;font-weight:700;font-size:.78rem;
-  padding:7px 12px;border-radius:999px;white-space:nowrap;
-}
-.dish a.d-wa:hover{background:var(--green);color:#fff;border-color:var(--green)}
 .menu-note{
   margin-top:18px;background:#f7ede0;border:1px solid #e3cdaf;border-radius:12px;
   padding:14px 16px;font-size:.9rem;color:var(--ink-soft);
@@ -388,7 +382,7 @@ footer{max-width:1100px;margin:0 auto;padding:28px 16px 90px;text-align:center;
 <section id="menu">
   <div class="sec-head">
     <h2>Меню</h2>
-    <p>Каждое блюдо можно заказать отдельно — нажмите «Заказать», и в WhatsApp откроется чат с уже подставленным названием блюда.</p>
+    <p>Каждое блюдо можно заказать отдельно — просто напишите нам в WhatsApp. Доставка за счёт покупателя либо самовывоз из заведения.</p>
   </div>
   <div class="menu-tabs" id="menuTabs"></div>
   <div id="menuGroups"></div>
@@ -473,10 +467,6 @@ footer{max-width:1100px;margin:0 auto;padding:28px 16px 90px;text-align:center;
 </a>
 
 <script>
-const WA = "821080247552";
-const orderLink = name =>
-  `https://wa.me/${WA}?text=${encodeURIComponent("Здравствуйте! Хочу заказать: " + name)}`;
-
 const MENU = [
   {
     tab: "Закуски и салаты",
@@ -625,11 +615,9 @@ MENU.forEach((cat, i) => {
       const d = document.createElement("div");
       d.className = "dish";
       d.innerHTML =
-        `<div class="d-info"><div class="d-name"></div>${desc ? '<div class="d-desc"></div>' : ""}</div>` +
-        `<a class="d-wa" target="_blank" rel="noopener">Заказать</a>`;
+        `<div class="d-info"><div class="d-name"></div>${desc ? '<div class="d-desc"></div>' : ""}</div>`;
       d.querySelector(".d-name").textContent = name;
       if (desc) d.querySelector(".d-desc").textContent = desc;
-      d.querySelector("a").href = orderLink(name.replace(/\s*🍆\s*$/, ""));
       grid.appendChild(d);
     });
     wrap.appendChild(grid);
